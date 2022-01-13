@@ -24,15 +24,26 @@ class Card:
         return f"Card ID{self.i_ID} -> the {self.getRankLiteral()} of {self.getSuiteLiteral()}S"
 
 class Deck:
-    a_Cards         = []
-    a_DrawnCards    = []
-
     def __init__(self):
+        self.a_Cards            = []
+        self.a_CardsById        = []
+        self.a_DrawnCards       = []
+        self.a_DrawnCardsById   = []
         for i in range(0, 52):
             self.a_Cards.append(Card(i))
+            self.setCardIDArray()
+
+    def setCardIDArray(self):
+        self.a_CardsById = []
+        for o_Card in self.a_Cards:
+            self.a_CardsById.append(o_Card.i_ID)
 
     def shuffle(self):
         shuffle(self.a_Cards)
+        self.setCardIDArray()
+
+    def getCardIDArray(self):
+        return self.a_CardsById
 
     def reset(self):
         self.__init__()
@@ -40,12 +51,12 @@ class Deck:
     def drawCard(self):
         o_DrawnCard = self.a_Cards.pop(0)
         self.a_DrawnCards.append(o_DrawnCard)
+        self.a_DrawnCardsById.append(o_DrawnCard.i_ID)
+        self.setCardIDArray()
         return o_DrawnCard
 
-
-
-o_TestDeck = Deck()
-o_TestDeck.shuffle()
-o_TestDeck.reset()
-for card in o_TestDeck.a_Cards:
-    print(card)
+    def drawCards(self, i_NumCards):
+        a_DrawnCards = []
+        for i in range(0, i_NumCards):
+            a_DrawnCards.append(self.drawCard())
+        return a_DrawnCards

@@ -113,3 +113,35 @@ def test_deck_creation():
     o_TestDeck = Deck()
     for i in range(0, 52):
         assert str(o_TestDeck.a_Cards[i]) == str(Card(i)), f"Expected {o_TestDeck.a_Cards[i]}, got {Card(i)}"
+
+def test_shuffle():
+    o_TestDeck1 = Deck()
+    o_TestDeck2 = Deck()
+    o_TestDeck1.shuffle()
+    o_TestDeck2.shuffle()
+    assert (o_TestDeck1.a_CardsById != o_TestDeck2.a_CardsById)
+
+def test_draw_unshuffled():
+    o_TestDeck = Deck()
+    o_TestCard = Card(0)
+    assert str(o_TestDeck.drawCard()) == str(o_TestCard)
+    assert str(o_TestDeck.a_DrawnCards[0]) == str(o_TestCard)
+    assert len(o_TestDeck.a_DrawnCards) == 1
+    assert len(o_TestDeck.a_Cards)      == 51
+    assert len(o_TestDeck.a_CardsById)  == 51
+    assert len(o_TestDeck.a_DrawnCardsById) == 1
+    assert o_TestCard.i_ID not in o_TestDeck.a_CardsById 
+    assert o_TestCard.i_ID in o_TestDeck.a_DrawnCardsById
+
+def test_multi_draw():
+    for i in range(0, 52):
+        o_TestDeck = Deck()
+        o_TestDeck.shuffle()
+        o_DrawnCards = o_TestDeck.drawCards(i)
+        for o_Card in o_DrawnCards:
+            assert o_Card.i_ID not in o_TestDeck.a_CardsById
+            assert o_Card.i_ID in o_TestDeck.a_DrawnCardsById
+            assert len(o_TestDeck.a_DrawnCards) == i
+            assert len(o_TestDeck.a_DrawnCardsById) == i
+            assert len(o_TestDeck.a_Cards)      == 52 - i
+            assert len(o_TestDeck.a_CardsById)  == 52 - i
