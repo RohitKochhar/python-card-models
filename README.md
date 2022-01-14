@@ -2,11 +2,11 @@
 Python classes to simulate playing cards
 
 ## Installation
-Installation can be done using the pip package manager. Information on the package can be found [here](https://test.pypi.org/project/python-card-models/0.0.1/)
+Installation can be done using the pip package manager. Information on the package can be found [here](https://test.pypi.org/project/PythonCardModels/)
 
 To install, run the following command in your terminal:
 ```
-pip install -i https://test.pypi.org/simple/ python-card-models==0.0.1
+pip install -i https://test.pypi.org/simple/ PythonCardModels
 ```
 
 ## Usage
