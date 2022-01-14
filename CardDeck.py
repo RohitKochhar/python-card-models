@@ -1,8 +1,8 @@
 from random import shuffle, randint
 
 class Card:
-    a_Suits    = ["SPADE", "CLUB", "HEART", "DIAMOND"]
-    a_Ranks     = ["ACE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING"]
+    _a_Suits    = ["SPADE", "CLUB", "HEART", "DIAMOND"]
+    _a_Ranks     = ["ACE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING"]
     def __init__(self, i_ID=randint(0,52)):
         self.i_ID       = i_ID
         self.i_Rank     = i_ID % 13
@@ -15,10 +15,10 @@ class Card:
         return self.i_Suit
 
     def getRankLiteral(self):
-        return self.a_Ranks[self.i_Rank]
+        return self._a_Ranks[self.i_Rank]
 
     def getSuitLiteral(self):
-        return self.a_Suits[self.i_Suit]
+        return self._a_Suits[self.i_Suit]
 
     def __str__(self):
         return f"Card ID{self.i_ID} -> the {self.getRankLiteral()} of {self.getSuitLiteral()}S"

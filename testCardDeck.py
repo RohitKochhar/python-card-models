@@ -135,6 +135,8 @@ def test_draw_unshuffled():
     assert len(o_TestDeck.a_DrawnCardsById) == 1
     assert o_TestCard.i_ID not in o_TestDeck.a_CardsById 
     assert o_TestCard.i_ID in o_TestDeck.a_DrawnCardsById
+    assert len(set(o_TestDeck.a_DrawnCards).intersection(o_TestDeck.a_Cards)) == 0
+    assert len(set(o_TestDeck.a_DrawnCardsById).intersection(o_TestDeck.a_CardsById)) == 0
 
 def test_multi_draw():
     for i in range(0, 52):
@@ -148,3 +150,5 @@ def test_multi_draw():
             assert len(o_TestDeck.a_DrawnCardsById) == i
             assert len(o_TestDeck.a_Cards)      == 52 - i
             assert len(o_TestDeck.a_CardsById)  == 52 - i
+            assert len(set(o_TestDeck.a_DrawnCards).intersection(o_TestDeck.a_Cards)) == 0
+            assert len(set(o_TestDeck.a_DrawnCardsById).intersection(o_TestDeck.a_CardsById)) == 0
